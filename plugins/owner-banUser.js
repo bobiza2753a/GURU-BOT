@@ -5,18 +5,18 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     if (m.isGroup) who = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : false
     else who = m.chat
     let user = global.db.data.users[who]
-    if (!who) throw `✳️ Tag or mention someone\n\n📌 Example : ${usedPrefix + command} @user`
+    if (!who) throw `✳️ قم بالإشارة إلى شخص ما أو الإشارة إليه\n\n📌 مثال : ${usedPrefix + command} @user`
     let users = global.db.data.users
     users[who].banned = true
     conn.reply(m.chat, `
-✅ BANNED
+✅ محظور
 
 ───────────
-@${who.split`@`[0]} you will no longer be able to use my commands `, m, { mentions: [who] })
+@${who.split`@`[0]} لن تتمكن بعد الآن من استخدام أوامري`, m, { mentions: [who] })
 }
 handler.help = ['ban @user']
 handler.tags = ['owner']
-handler.command = /^ban$/i
+handler.command = /^بان$/i
 handler.rowner = true
 
 export default handler
