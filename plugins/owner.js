@@ -8,10 +8,10 @@ function handler(m, conn) {
     // التحقق من وجود البريد الإلكتروني والموقع الإلكتروني قبل إرسالهما
     if (email && website) {
       // إرسال البريد الإلكتروني وموقع الويب في البطاقة إلى جهة الاتصال المحددة
-      conn.sendMessage(m.chat, `البريد الإلكتروني: ${email}\nالموقع الإلكتروني: ${website}`, m)
+      this.sendContact(m.chat, `البريد الإلكتروني: ${email}\nالموقع الإلكتروني: ${website}`, m)
     } else {
       // في حالة عدم وجود بريد إلكتروني أو موقع إلكتروني في البطاقة
-      conn.sendMessage(m.chat, "لم يتم العثور على بريد إلكتروني أو موقع إلكتروني في البطاقة.", m)
+      this.sendContact(m.chat, "لم يتم العثور على بريد إلكتروني أو موقع إلكتروني في البطاقة.", m)
     }
   } else {
     // في حالة عدم وجود مرفقات، دمج بيانات المالك في رد واحد
@@ -21,10 +21,10 @@ function handler(m, conn) {
     if (data.length > 0) {
       // دمج بيانات المالك في رد واحد
       let contactInfo = data.map(([id, name]) => `${name}: ${id}`).join('\n')
-      conn.sendMessage(m.chat, `بيانات المالك:\n${contactInfo}`, m)
+      this.sendContact(m.chat, `بيانات المالك:\n${contactInfo}`, m)
     } else {
       // في حالة عدم وجود بيانات للمالك
-      conn.sendMessage(m.chat, "لا يوجد بيانات للمالك.", m)
+     this.sendContact(m.chat, "لا يوجد بيانات للمالك.", m)
     }
   }
 }
