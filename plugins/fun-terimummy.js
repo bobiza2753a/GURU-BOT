@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import translate from '@vitalets/google-translate-api';
+import { translate } from '@vitalets/google-translate-api';
 
 let yoMamaJokeHandler = async (m, { conn, text }) => {
   try {
@@ -31,8 +31,8 @@ let yoMamaJokeHandler = async (m, { conn, text }) => {
   }
 };
 
-handler.help = ['yomamajoke'];
-handler.tags = ['fun'];
-handler.command = /^(اقتباس2|حقيقه|مثابره)$/i;
+handler.help = ['terimummy'];
+handler.tags = ['terimummy'];
+handler.command = /^(اقتباس2|مثابره)$/i;
 
 export default handler;
