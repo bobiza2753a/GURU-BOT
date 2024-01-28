@@ -1,32 +1,17 @@
-import fetch from 'node-fetch';
+import fetch from 'node-fetch'
 import { translate } from '@vitalets/google-translate-api';
+let handler  = async (m, { conn }) => {
+    let shizokeys = 'shizo'	
+  let res = await fetch(`https://shizoapi.onrender.com/api/texts/shayari?apikey=${shizokeys}`)
+  if (!res.ok) throw await res.text()
+	    let json = await res.json()
 
-let yoMamaJokeHandler = async (m, { conn, text }) => {
-  try {
-    let res = await fetch(`https://shizoapi.onrender.com/api/texts/shayari?apikey=shizo`);
+  let translatedText = await translate(json.result, { to: 'ar' });
 
-    if (!res.ok) {
-      throw new Error(`فشل طلب API مع الحالة ${res.status}`);
-    }
-
-    let json = await res.json();
-
-    console.log('JSON response:', json);
-
-    let yoMamaJoke = `${json.result}`;
-    
-    let translation = await translate(yoMamaJoke, { to: 'ar' });
-
-    let translatedYoMamaJoke = translation.text;
-
-    m.reply(translatedYoMamaJoke);
-  } catch (error) {
-    console.error(error);
-  }
+  conn.sendMessage(m.chat, { text: translatedText.text, mentions: [m.sender] }, { quoted: m });
 };
+handler.help = ['shayeri']
+handler.tags = ['shayeri']
+handler.command = /^(شعر)$/i
 
-handler.help = ['شعر'];
-handler.tags = ['fun'];
-handler.command = /^(شعر)$/i;
-
-export default handler;
+export default handler
