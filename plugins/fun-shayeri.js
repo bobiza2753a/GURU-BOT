@@ -25,7 +25,7 @@ let yoMamaJokeHandler = async (m, { conn, text }) => {
   }
 };
 
-handler.help = ['yomamajoke'];
+handler.help = ['شعر'];
 handler.tags = ['fun'];
 handler.command = /^(شعر)$/i;
 
