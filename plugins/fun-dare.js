@@ -1,20 +1,17 @@
 import fetch from 'node-fetch'
-import translate from '@vitalets/google-translate-api';
-
+import { translate } from '@vitalets/google-translate-api';
 let handler  = async (m, { conn }) => {
-    let shizokeys = 'shizo'
+    let shizokeys = 'shizo'	
   let res = await fetch(`https://shizoapi.onrender.com/api/texts/dare?apikey=${shizokeys}`)
   if (!res.ok) throw await res.text()
 	    let json = await res.json()
 
-  let zoro = `${json.result}`
+  let translatedText = await translate(json.result, { to: 'ar' });
 
- let translatedshar = await translate(json.result, { to: 'ar' });
-  
-  conn.sendMessage(m.chat, { text: translatedshar, mentions: [m.sender] }, { quoted: m })
-}
+  conn.sendMessage(m.chat, { text: translatedText.text, mentions: [m.sender] }, { quoted: m });
+};
 handler.help = ['dare']
-handler.tags = ['fun']
+handler.tags = ['dare']
 handler.command = /^(تجرؤ)$/i
 
 export default handler
