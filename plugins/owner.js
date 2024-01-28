@@ -1,4 +1,4 @@
-function handler(m) {
+function handler(m, conn) {
   // التحقق مما إذا كانت الرسالة تحتوي على مرفقات
   if (m.message.attachments && m.message.attachments.length > 0 && m.message.attachments[0].data) {
     // الحصول على بريد إلكتروني وموقع الويب من البطاقة
@@ -8,10 +8,10 @@ function handler(m) {
     // التحقق من وجود البريد الإلكتروني والموقع الإلكتروني قبل إرسالهما
     if (email && website) {
       // إرسال البريد الإلكتروني وموقع الويب في البطاقة إلى جهة الاتصال المحددة
-      this.sendText(m.chat, `البريد الإلكتروني: ${email}\nالموقع الإلكتروني: ${website}`, m)
+      conn.sendMessage(m.chat, `البريد الإلكتروني: ${email}\nالموقع الإلكتروني: ${website}`, m)
     } else {
       // في حالة عدم وجود بريد إلكتروني أو موقع إلكتروني في البطاقة
-      this.sendText(m.chat, "لم يتم العثور على بريد إلكتروني أو موقع إلكتروني في البطاقة.", m)
+      conn.sendMessage(m.chat, "لم يتم العثور على بريد إلكتروني أو موقع إلكتروني في البطاقة.", m)
     }
   } else {
     // في حالة عدم وجود مرفقات، دمج بيانات المالك في رد واحد
@@ -21,10 +21,10 @@ function handler(m) {
     if (data.length > 0) {
       // دمج بيانات المالك في رد واحد
       let contactInfo = data.map(([id, name]) => `${name}: ${id}`).join('\n')
-      this.sendText(m.chat, `بيانات المالك:\n${contactInfo}`, m)
+      conn.sendMessage(m.chat, `بيانات المالك:\n${contactInfo}`, m)
     } else {
       // في حالة عدم وجود بيانات للمالك
-      this.sendText(m.chat, "لا يوجد بيانات للمالك.", m)
+      conn.sendMessage(m.chat, "لا يوجد بيانات للمالك.", m)
     }
   }
 }
