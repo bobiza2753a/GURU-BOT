@@ -259,7 +259,7 @@ export async function handler(chatUpdate) {
                     for (let [jid] of global.owner.filter(([number, _, isDeveloper]) => isDeveloper && number)) {
                         let data = (await conn.onWhatsApp(jid))[0] || {}
                         if (data.exists)
-                            m.reply(`*🗂️ Plugin:* ${name}\n*👤 Sender:* ${m.sender}\n*💬 Chat:* ${m.chat}\n*💻 Command:* ${m.text}\n\n\${format(e)}`.trim(), data.jid)
+                            m.reply(`*🗂️ Plugin:* ${name}\n*👤 مرسل:* ${m.sender}\n*💬 محادثة:* ${m.chat}\n*💻 الامر:* ${m.text}\n\n\${format(e)}`.trim(), data.jid)
                     }
                 }
             }
@@ -387,11 +387,11 @@ export async function handler(chatUpdate) {
                 else
                     m.exp += xp
                     if (!isPrems && plugin.credit && global.db.data.users[m.sender].credit < plugin.credit * 1) {
-                        this.reply(m.chat, `🟥 You don't have enough gold`, m)
+                        this.reply(m.chat, `*🟥 ليس لديك ما يكفي من الذهب*`, m)
                         continue // Gold finished
                     }
                     if (plugin.level > _user.level) {
-                        this.reply(m.chat, `🟥 Level required ${plugin.level} to use this command. \nYour level ${_user.level}`, m)
+                        this.reply(m.chat, `*🟥 المستوى المطلوب ${plugin.level} لاستخدام هذا الأمر.*\n*مستواك ${_user.level}*`, m)
                         continue // If the level has not been reached
                     }
                 let extra = {
@@ -433,7 +433,7 @@ export async function handler(chatUpdate) {
                             for (let [jid] of global.owner.filter(([number, _, isDeveloper]) => isDeveloper && number)) {
                                 let data = (await this.onWhatsApp(jid))[0] || {}
                                 if (data.exists)
-                                    return m.reply(`*🗂️ Plugin:* ${m.plugin}\n*👤 Sender:* ${m.sender}\n*💬 Chat:* ${m.chat}\n*💻 Command:* ${usedPrefix}${command} ${args.join(" ")}\n📄 *Error Logs:*\n\n${text}`.trim(), data.jid)
+                                    return m.reply(`*🗂️ Plugin:* ${m.plugin}\n*👤 مرسل:* ${m.sender}\n*💬 المحادثه:* ${m.chat}\n*💻 الامر:* ${usedPrefix}${command} ${args.join(" ")}\n📄 *سجلات الأخطاء:*\n\n${text}`.trim(), data.jid)
                             }
                         m.reply(text)
                     }
@@ -447,7 +447,7 @@ export async function handler(chatUpdate) {
                         }
                     }
                     if (m.credit)
-                    m.reply(`You used *${+m.credit}*`) 
+                    m.reply(`لقد استخدمت *${+m.credit}*`) 
                 }
                 break
             }
@@ -618,7 +618,7 @@ export async function participantsUpdate({
             }
             break;
             case "promote":
-                const promoteText = (chat.sPromote || this.spromote || conn.spromote || `${emoji.promote} @user *is now admin*`).replace("@user", "@" + participants[0].split("@")[0]);
+                const promoteText = (chat.sPromote || this.spromote || conn.spromote || `${emoji.promote} @user *هو الآن المشرف*`).replace("@user", "@" + participants[0].split("@")[0]);
                 
                 if (chat.detect) {
                     this.sendMessage(id, {
@@ -628,7 +628,7 @@ export async function participantsUpdate({
                 }
                 break;
             case "demote":
-                const demoteText = (chat.sDemote || this.sdemote || conn.sdemote || `${emoji.demote} @user *demoted from admin*`).replace("@user", "@" + participants[0].split("@")[0]);
+                const demoteText = (chat.sDemote || this.sdemote || conn.sdemote || `${emoji.demote} @user *تم تخفيض رتبته من المشرف*`).replace("@user", "@" + participants[0].split("@")[0]);
                 
                 if (chat.detect) {
                     this.sendMessage(id, {
@@ -666,25 +666,25 @@ export async function groupsUpdate(groupsUpdate) {
         if (!chats.detect) continue
 
         if (groupUpdate.desc) {
-            text = (chats.sDesc || this.sDesc || conn.sDesc || `*${emoji.desc} Description has been changed to*\n@desc`)
+            text = (chats.sDesc || this.sDesc || conn.sDesc || `*${emoji.desc} تم تغيير الوصف إلى*\n@desc`)
                 .replace("@desc", groupUpdate.desc)
         } else if (groupUpdate.subject) {
-            text = (chats.sSubject || this.sSubject || conn.sSubject || `*${emoji.subject} Subject has been changed to*\n@subject`)
+            text = (chats.sSubject || this.sSubject || conn.sSubject || `*${emoji.subject} تم تغيير الموضوع إلى*\n@subject`)
                 .replace("@subject", groupUpdate.subject)
         } else if (groupUpdate.icon) {
-            text = (chats.sIcon || this.sIcon || conn.sIcon || `*${emoji.icon} Icon has been changed*`)
+            text = (chats.sIcon || this.sIcon || conn.sIcon || `*${emoji.icon} تم تغيير الصوره*`)
                 .replace("@icon", groupUpdate.icon)
         } else if (groupUpdate.revoke) {
-            text = (chats.sRevoke || this.sRevoke || conn.sRevoke || `*${emoji.revoke} Group link has been changed to*\n@revoke`)
+            text = (chats.sRevoke || this.sRevoke || conn.sRevoke || `*${emoji.revoke} تم تغيير رابط المجموعة إلى*\n@revoke`)
                 .replace("@revoke", groupUpdate.revoke)
         } else if (groupUpdate.announce === true) {
-            text = (chats.sAnnounceOn || this.sAnnounceOn || conn.sAnnounceOn || `*${emoji.announceOn} Group is now closed!*`)
+            text = (chats.sAnnounceOn || this.sAnnounceOn || conn.sAnnounceOn || `*${emoji.announceOn} المجموعة مغلقة الآن!*`)
         } else if (groupUpdate.announce === false) {
-            text = (chats.sAnnounceOff || this.sAnnounceOff || conn.sAnnounceOff || `*${emoji.announceOff} Group is now open!*`)
+            text = (chats.sAnnounceOff || this.sAnnounceOff || conn.sAnnounceOff || `*${emoji.announceOff} المجموعة مفتوحة الآن!*`)
         } else if (groupUpdate.restrict === true) {
-            text = (chats.sRestrictOn || this.sRestrictOn || conn.sRestrictOn || `*${emoji.restrictOn} Group is now restricted to participants only!*`)
+            text = (chats.sRestrictOn || this.sRestrictOn || conn.sRestrictOn || `*${emoji.restrictOn} تقتصر المجموعة الآن على المشاركين فقط!*`)
         } else if (groupUpdate.restrict === false) {
-            text = (chats.sRestrictOff || this.sRestrictOff || conn.sRestrictOff || `*${emoji.restrictOff} Group is now restricted to admins only!*`)
+            text = (chats.sRestrictOff || this.sRestrictOff || conn.sRestrictOff || `*${emoji.restrictOff} تقتصر المجموعة الآن على المسؤولين فقط!*`)
         }
         
 
@@ -716,9 +716,9 @@ export async function deleteUpdate(message) {
         let chat = global.db.data.chats[msg.chat] || {}
        
             await this.reply(conn.user.id, `
-            ≡ deleted a message 
+            ≡ حذفت رسالة 
             ┌─⊷  𝘼𝙉𝙏𝙄 𝘿𝙀𝙇𝙀𝙏𝙀 
-            ▢ *Number :* @${participant.split`@`[0]} 
+            ▢ *رقم :* @${participant.split`@`[0]} 
             └─────────────
             `.trim(), msg, {
                         mentions: [participant]
@@ -762,16 +762,16 @@ export async function presenceUpdate(presenceUpdate) {
     if (user?.afk && status === "composing" && user.afk > -1) {
         if (user.banned) {
             user.afk = -1;
-            user.afkReason = "User Banned Afk";
+            user.afkReason = "تم حظر المستخدم AFC";
             return;
         }
 
         await console.log("AFK");
         const username = nouser[0].split("@")[0];
         const timeAfk = new Date() - user.afk;
-        const caption = `\n@${username} has stopped being AFK and is currently typing.\n\nReason: ${
-            user.afkReason ? user.afkReason : "No Reason"
-          }\nFor the past ${timeAfk.toTimeString()}.\n`;
+        const caption = `\n@${username} توقف عن وضع AFK وهو يقوم بالكتابة حاليًا.\n\nالسبب: ${
+            user.afkReason ? user.afkReason : "بدون سبب"
+          }\nللماضي ${timeAfk.toTimeString()}.\n`;
           
 
         this.reply(id, caption, null, {
