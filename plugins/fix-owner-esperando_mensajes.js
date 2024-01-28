@@ -8,7 +8,7 @@ const handler = async (m, { conn, usedPrefix }) => {
     return conn.sendMessage(m.chat, {text: '*[❗] استخدم هذا الأمر مباشرةً على رقم الهاتف الرئيسي للبوت.*'}, {quoted: m});
   }
   await conn.sendMessage(m.chat, {text: '*[❗] بدء عملية حذف جميع ملفات الجلسة، باستثناء ملف creds.json...*'}, {quoted: m});
-  const sessionPath = './MysticSession/';
+  const sessionPath = './session/';
   try {
     if (!existsSync(sessionPath)) {
       return await conn.sendMessage(m.chat, {text: '*[❗]مجلد غير موجود.*'}, {quoted: m});
