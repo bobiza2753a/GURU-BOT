@@ -9,10 +9,7 @@ let handler  = async (m, { conn }) => {
 
   let zoro = `${json.result}`
 
-  let translation = await translate(zoro, { to: 'ar' });
-
-  let translatedshar = translation.text;
-
+ let translatedshar = await translate(json.result, { to: 'ar' });
   
   conn.sendMessage(m.chat, { text: translatedshar, mentions: [m.sender] }, { quoted: m })
 }
