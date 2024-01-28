@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 import translate from '@vitalets/google-translate-api';
 
-let yoMamaJokeHandler = async (m, { conn, text }) => {
+let sharHandler = async (m, { conn, text }) => {
   try {
     let res = await fetch(`https://shizoapi.onrender.com/api/texts/dare?apikey=shizo`);
 
@@ -13,13 +13,13 @@ let yoMamaJokeHandler = async (m, { conn, text }) => {
 
     console.log('JSON response:', json);
 
-    let yoMamaJoke = `${json.result}`;
+    let zoro = `${json.result}`;
     
-    let translation = await translate(yoMamaJoke, { to: 'ar' });
+    let translation = await translate(zoro, { to: 'ar' });
 
-    let translatedYoMamaJoke = translation.text;
+    let translatedshar = translation.text;
 
-    m.reply(translatedYoMamaJoke);
+    m.reply(translatedshar);
   } catch (error) {
     console.error(error);
   }
