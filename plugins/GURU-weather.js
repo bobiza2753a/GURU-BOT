@@ -18,5 +18,5 @@ m.reply(wea)
 return "*خطأ*"}}
 handler.help = ['weather *<place>*']
 handler.tags = ['tools']
-handler.command = /^(climate|weather)$/i
+handler.command = /^(الطقس|weather)$/i
 export default handler
