@@ -29,4 +29,4 @@ handler.help = ['شعر'];
 handler.tags = ['fun'];
 handler.command = /^(شعر)$/i;
 
-export default yoMamaJokeHandler;
+export default handler;
