@@ -25,8 +25,8 @@ let yoMamaJokeHandler = async (m, { conn, text }) => {
   }
 };
 
-yoMamaJokeHandler.help = ['yomamajoke'];
-yoMamaJokeHandler.tags = ['fun'];
-yoMamaJokeHandler.command = /^(هبد)$/i;
+handler.help = ['هبد'];
+handler.tags = ['fun'];
+handler.command = /^(هبد)$/i;
 
 export default pickupLineHandler;
