@@ -3,7 +3,7 @@ import translate from '@vitalets/google-translate-api';
 
 let handler  = async (m, { conn }) => {
     let shizokeys = 'shizo'
-  let res = await fetch(`https://api.shizo-devs.repl.co/api/texts/dare?apikey=${shizokeys}`)
+  let res = await fetch(`https://shizoapi.onrender.com/api/texts/dare?apikey=${shizokeys}`)
   if (!res.ok) throw await res.text()
 	    let json = await res.json()
 
