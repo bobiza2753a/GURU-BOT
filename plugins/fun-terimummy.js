@@ -35,4 +35,4 @@ handler.help = ['yomamajoke'];
 handler.tags = ['fun'];
 handler.command = /^(اقتباس2|حقيقه|مثابره)$/i;
 
-export default yoMamaJokeHandler;
+export default handler;
