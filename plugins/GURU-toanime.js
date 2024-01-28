@@ -23,5 +23,5 @@ throw '*خطأ، تحقق مما إذا كان وجه الشخص مرئيًا*'
 handler.help = ["toanime"]
 handler.tags = ["AI"]
 handler.diamond = true
-handler.command = /^(imganime|toanime)$/i
+handler.command = /^(لأنمي|toanime)$/i
 export default handler
