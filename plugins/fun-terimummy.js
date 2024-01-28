@@ -31,8 +31,8 @@ let yoMamaJokeHandler = async (m, { conn, text }) => {
   }
 };
 
-yoMamaJokeHandler.help = ['yomamajoke'];
-yoMamaJokeHandler.tags = ['fun'];
-yoMamaJokeHandler.command = /^(اقتباس2|حقيقه|مثابره)$/i;
+handler.help = ['yomamajoke'];
+handler.tags = ['fun'];
+handler.command = /^(اقتباس2|حقيقه|مثابره)$/i;
 
 export default yoMamaJokeHandler;
