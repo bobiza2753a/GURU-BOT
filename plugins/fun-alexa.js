@@ -1,4 +1,5 @@
 import fetch from 'node-fetch';
+import { translate } from '@vitalets/google-translate-api';
 
 let handler = async (m, { conn, text, usedPrefix, command }) => {
   const name = conn.getName(m.sender);
@@ -14,9 +15,8 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 
   const json = await res.json();
   
-  
-    let reply = json.result.response;
-    m.reply(reply);
+    let translatedText = await translate(json.result.response, { to: 'ar' });
+    m.reply(translatedText);
 
 };
 
