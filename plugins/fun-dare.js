@@ -1,33 +1,24 @@
-import fetch from 'node-fetch';
+import fetch from 'node-fetch'
 import translate from '@vitalets/google-translate-api';
 
-let sharHandler = async (m, { conn, text }) => {
-  try {
-    let res = await fetch(`https://shizoapi.onrender.com/api/texts/dare?apikey=shizo`);
+let handler  = async (m, { conn }) => {
+    let shizokeys = 'shizo'
+  let res = await fetch(`https://api.shizo-devs.repl.co/api/texts/dare?apikey=${shizokeys}`)
+  if (!res.ok) throw await res.text()
+	    let json = await res.json()
 
-    if (!res.ok) {
-      throw new Error(`فشل طلب API مع الحالة ${res.status}`);
-    }
+  let zoro = `${json.result}`
 
-    let json = await res.json();
+  let translation = await translate(zoro, { to: 'ar' });
 
-    console.log('JSON response:', json);
+  let translatedshar = translation.text;
 
-    let zoro = `${json.result}`;
-    
-    let translation = await translate(zoro, { to: 'ar' });
-
-    let translatedshar = translation.text;
-
-    m.reply(translatedshar);
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-handler.help = ['تجرؤ'];
-handler.tags = ['fun'];
-handler.command = /^(تجرؤ)$/i;
+  
+  conn.sendMessage(m.chat, { text: translatedshar, mentions: [m.sender] }, { quoted: m })
+}
+handler.help = ['dare']
+handler.tags = ['fun']
+handler.command = /^(تجرؤ)$/i
 
 export default handler
 
