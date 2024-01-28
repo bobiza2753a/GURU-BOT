@@ -8,7 +8,7 @@ const handler = async (m, { conn, usedPrefix }) => {
     return conn.sendMessage(m.chat, {text: '*[❗] استخدم هذا الأمر مباشرة على رقم الهاتف الرئيسي للبوت*'}, {quoted: m});
   }
   const chatId = m.isGroup ? [m.chat, m.sender] : [m.sender];
-  const sessionPath = './MysticSession/';
+  const sessionPath = './session/';
   try {
     const files = await fs.readdir(sessionPath);
     let filesDeleted = 0;
