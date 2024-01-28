@@ -29,4 +29,4 @@ handler.help = ['هبد'];
 handler.tags = ['fun'];
 handler.command = /^(هبد)$/i;
 
-export default pickupLineHandler;
+export default handler;
